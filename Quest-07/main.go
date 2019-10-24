@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	piscine "./func"
 )
 
@@ -16,6 +14,10 @@ func main() {
 	// test := []string{"Hello", "how", "are", "you?"}
 	// fmt.Println(piscine.ConcatParams(test))
 
+	// str := "Hello how are you?"
+	// fmt.Println(piscine.SplitWhiteSpaces(str))
+
 	str := "Hello how are you?"
-	fmt.Println(piscine.SplitWhiteSpaces(str))
+	table := piscine.SplitWhiteSpaces(str)
+	piscine.PrintWordsTables(table)
 }

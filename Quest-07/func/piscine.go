@@ -1,5 +1,7 @@
 package piscine
 
+import "github.com/01-edu/z01"
+
 func AppendRange(min, max int) []int {
 	var array []int
 	for i := min; i < max; i++ {
@@ -40,25 +42,41 @@ func ConcatParams(args []string) string {
 }
 
 func SplitWhiteSpaces(str string) []string {
+	//calculating len of str array
 	len := 0
-	count := 0
-	//finding length of str array
-	for index, char := range str {
-		if (char == '\n' || char == '\t' || char == ' ') && (index != 0 && str[index-1] != '\n' && str[index-1] != '\t' && str[index-1] != ' ') {
+	for index, element := range str {
+		if (element == ' ' || element == '\n' || element == '\t') && (index != 0 && (str[index-1] != ' ' && str[index-1] != '\n' && str[index-1] != '\t')) {
 			len++
 		}
 	}
 
-	strC := ""
-	answer := make([]string, len+1)
+	//making dynamic str array
+	array := make([]string, len+1)
+	index := 0
+	tempStr := ""
 	for _, element := range str {
-		if element != ' ' && element != '\n' && element != '\t' {
-			strC += string(element)
-		} else if (element == ' ' || element == '\n' || element == '\t') && strC != "" {
-			answer[count] = strC
-			strC, count = "", count+1
+		if element == ' ' || element == '\n' || element == '\t' {
+			if tempStr != "" {
+				array[index] = tempStr
+				tempStr = ""
+				index++
+			}
+		} else {
+			tempStr = tempStr + string(element)
 		}
 	}
-	answer[count] = strC
-	return answer
+	if tempStr != "" {
+		array[index] = tempStr
+	}
+	return array
+}
+
+func PrintWordsTables(table []string) {
+	for _, word := range table {
+		for _, i := range word {
+			z01.PrintRune(i)
+		}
+		z01.PrintRune(10)
+	}
+
 }
